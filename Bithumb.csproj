@@ -6,8 +6,7 @@
 		<Nullable>enable</Nullable>
 		<RootNamespace>ShareInvest.$(MSBuildProjectName.Replace(" ", "_"))</RootNamespace>
 		<GeneratePackageOnBuild>True</GeneratePackageOnBuild>
-		<PackageId>ShareInvest.bithumb</PackageId>
-		<Version>1.0.0.0</Version>
+		<PackageId>ShareInvest.Bithumb</PackageId>
 		<Authors>cyberprophet</Authors>
 		<Company>ShareInvest Corp.</Company>
 		<Copyright>Copyright ⓒ 2024, ShareInvest Corp.</Copyright>
@@ -16,6 +15,7 @@
 		<PackageTags>crypto,trading,api,shareinvest,bithumb</PackageTags>
 		<PackageLicenseFile>LICENSE.txt</PackageLicenseFile>
 		<PackageRequireLicenseAcceptance>True</PackageRequireLicenseAcceptance>
+		<Version>1.0.0.1</Version>
 	</PropertyGroup>
 
 	<ItemGroup>
@@ -30,8 +30,7 @@
 	</ItemGroup>
 
 	<ItemGroup>
-		<PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
-		<PackageReference Include="RestSharp" Version="110.2.0" />
+		<PackageReference Include="ShareInvest.Crypto" Version="1.0.0" />
 	</ItemGroup>
 
 </Project>
