@@ -1,4 +1,4 @@
-# bithumb
+# [![NuGet](https://img.shields.io/nuget/v/ShareInvest.Bithumb?label=ShareInvest.Bithumb&style=plastic&logo=nuget&color=004880)](https://www.nuget.org/packages/ShareInvest.Bithumb)
 ```C#
 using Newtonsoft.Json;
 
