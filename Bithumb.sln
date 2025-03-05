@@ -5,8 +5,6 @@ VisualStudioVersion = 17.9.34902.65
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Bithumb", "Bithumb.csproj", "{C8447B43-FBA0-463E-8BAF-C0C3865369EE}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Test", "..\Test\Test.csproj", "{C0851631-1517-4113-84D4-26BA4D42BF0F}"
-EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -17,10 +15,6 @@ Global
 		{C8447B43-FBA0-463E-8BAF-C0C3865369EE}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{C8447B43-FBA0-463E-8BAF-C0C3865369EE}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{C8447B43-FBA0-463E-8BAF-C0C3865369EE}.Release|Any CPU.Build.0 = Release|Any CPU
-		{C0851631-1517-4113-84D4-26BA4D42BF0F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{C0851631-1517-4113-84D4-26BA4D42BF0F}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{C0851631-1517-4113-84D4-26BA4D42BF0F}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{C0851631-1517-4113-84D4-26BA4D42BF0F}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
