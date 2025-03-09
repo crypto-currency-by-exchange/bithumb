@@ -1,44 +1,31 @@
 ﻿using Newtonsoft.Json;
-using Newtonsoft.Json.Linq;
 
 using ShareInvest.Bithumb.EventHandler;
+using ShareInvest.Bithumb.Models;
 using ShareInvest.Crypto;
 
-using System.Diagnostics;
+using System.Collections.Concurrent;
 using System.Net.WebSockets;
 using System.Text;
 
 namespace ShareInvest.Bithumb;
 
-public class WebSocket : ShareWebSocket<TickerEventArgs>
+public class WebSocket : ShareWebSocket<ResponseEventArgs>
 {
-    public WebSocket() : base("pubwss.bithumb.com/pub/ws")
+    public WebSocket() : base("ws-api.bithumb.com/websocket/v1")
     {
 
     }
 
-    /// <summary>
-    /// symbols: BTC_KRW, ETH_KRW, …
-    /// type: 구독 메시지 종류("ticker" / "transaction" / "orderbookdepth")
-    /// (optional)tickTypes: tick 종류 ("30M"/"1H"/"12H"/"24H"/"MID")
-    /// </summary>
-    public async Task RequestAsync(string type, IEnumerable<string> symbols, params string[] tickTypes)
+    public async Task RequestAsync(params object[] objArr)
     {
-        await base.RequestAsync(JsonConvert.SerializeObject(new
-        {
-            type,
-            symbols,
-            tickTypes
-        }));
-    }
+        Queue<object> queue = new();
 
-    public async Task RequestAsync(string type, params string[] symbols)
-    {
-        await base.RequestAsync(JsonConvert.SerializeObject(new
+        foreach (var obj in objArr)
         {
-            type,
-            symbols
-        }));
+            queue.Enqueue(obj);
+        }
+        await base.RequestAsync(JsonConvert.SerializeObject(queue));
     }
 
     public override async Task RequestAsync(string json)
@@ -50,42 +37,13 @@ public class WebSocket : ShareWebSocket<TickerEventArgs>
     {
         while (WebSocketState.Open == Socket.State)
         {
-            var buffer = new byte[0x400];
+            var buffer = new byte[0x400 * 3];
 
-            try
-            {
-                var res = await Socket.ReceiveAsync(new ArraySegment<byte>(buffer), cts.Token);
+            var res = await Socket.ReceiveAsync(new ArraySegment<byte>(buffer), cts.Token);
 
-                var str = Encoding.UTF8.GetString(buffer, 0, res.Count);
-
-                if (string.IsNullOrEmpty(str))
-                {
-                    continue;
-                }
-                var jToken = JToken.Parse(str);
-
-                if (string.IsNullOrEmpty(jToken.Value<string>("status")))
-                {
-                    OnReceiveTicker(str);
-
-                    continue;
-                }
-                Console.WriteLine(new
-                {
-                    CryptoExchange = nameof(Bithumb),
-                    DateTime.Now,
-                    Response = jToken
-                });
-            }
-            catch (Exception exception)
-            {
-#if DEBUG
-                Debug.WriteLine(exception);
-#else
-                Console.WriteLine(exception);
-#endif
-            }
+            OnReceiveTicker(Encoding.UTF8.GetString(buffer, 0, res.Count));
         }
+
         Console.WriteLine(new
         {
             CryptoExchange = nameof(Bithumb),
@@ -99,5 +57,14 @@ public class WebSocket : ShareWebSocket<TickerEventArgs>
         await base.ConnectAsync(token, interval: interval ?? TimeSpan.FromMilliseconds(0xFFFFFFFE));
     }
 
+    public void SetQuotes(Orderbook orderbook)
+    {
+        if (string.IsNullOrEmpty(orderbook.Code) is false)
+        {
+            quotes[orderbook.Code] = orderbook;
+        }
+    }
+
     readonly CancellationTokenSource cts = new();
+    readonly ConcurrentDictionary<string, Orderbook> quotes = new();
 }
