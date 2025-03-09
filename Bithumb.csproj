@@ -5,32 +5,21 @@
 		<ImplicitUsings>enable</ImplicitUsings>
 		<Nullable>enable</Nullable>
 		<RootNamespace>ShareInvest.$(MSBuildProjectName.Replace(" ", "_"))</RootNamespace>
-		<GeneratePackageOnBuild>True</GeneratePackageOnBuild>
+		<GeneratePackageOnBuild>False</GeneratePackageOnBuild>
 		<PackageId>ShareInvest.Bithumb</PackageId>
 		<Authors>cyberprophet</Authors>
 		<Company>ShareInvest Corp.</Company>
 		<Copyright>Copyright ⓒ 2024, ShareInvest Corp.</Copyright>
 		<PackageProjectUrl>https://github.com/crypto-currency-by-exchange</PackageProjectUrl>
-		<PackageIcon>bithumb.png</PackageIcon>
+		<PackageIcon></PackageIcon>
 		<PackageTags>crypto,trading,api,shareinvest,bithumb</PackageTags>
-		<PackageLicenseFile>LICENSE.txt</PackageLicenseFile>
+		<PackageLicenseFile></PackageLicenseFile>
 		<PackageRequireLicenseAcceptance>True</PackageRequireLicenseAcceptance>
-		<Version>1.0.0.1</Version>
+		<Version>1.0.0.4</Version>
 	</PropertyGroup>
 
 	<ItemGroup>
-		<None Include="..\..\..\Pictures\Icon\bithumb.png">
-			<Pack>True</Pack>
-			<PackagePath>\</PackagePath>
-		</None>
-		<None Include="..\UPbit\LICENSE.txt">
-			<Pack>True</Pack>
-			<PackagePath>\</PackagePath>
-		</None>
-	</ItemGroup>
-
-	<ItemGroup>
-		<PackageReference Include="ShareInvest.Crypto" Version="1.0.0" />
+		<ProjectReference Include="..\Crypto\Crypto.csproj" />
 	</ItemGroup>
 
 </Project>

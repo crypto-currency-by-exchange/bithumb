@@ -28,7 +28,7 @@ public class Market
     }
 
     [DataMember, JsonProperty("market_warning"), JsonPropertyName("market_warning")]
-    public string? Warning
+    public MarketWarning Warning
     {
         get; set;
     }

@@ -21,3 +21,35 @@ public enum Change
     RISE,
     FALL
 }
+
+/// <summary>
+/// SNAPSHOT
+/// REALTIME: 실시간
+/// </summary>
+public enum StreamType
+{
+    SNAPSHOT,
+    REALTIME
+}
+
+/// <summary>
+/// ASK: 매도
+/// BID: 매수
+/// </summary>
+public enum Order
+{
+    ASK,
+    BID
+}
+
+/// <summary>
+/// PREVIEW: 입금지원
+/// ACTIVE: 거래지원가능
+/// DELISTED: 거래지원종료
+/// </summary>
+public enum MarketState
+{
+    PREVIEW,
+    ACTIVE,
+    DELISTED
+}

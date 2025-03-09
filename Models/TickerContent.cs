@@ -1,9 +1,15 @@
-﻿namespace ShareInvest.Bithumb.Models;
+﻿using Newtonsoft.Json;
+
+using System.Runtime.Serialization;
+using System.Text.Json.Serialization;
+
+namespace ShareInvest.Bithumb.Models;
 
 public class TickerContent
 {
     /// <summary>통화코드</summary>
-    public string? Symbol
+    [DataMember, JsonProperty("symbol"), JsonPropertyName("symbol")]
+    public string? Code
     {
         get; set;
     }

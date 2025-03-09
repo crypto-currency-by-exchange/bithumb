@@ -1,12 +1,14 @@
 ﻿using Newtonsoft.Json;
 
+using ShareInvest.Crypto.Models;
+
 using System.ComponentModel.DataAnnotations;
 using System.Runtime.Serialization;
 using System.Text.Json.Serialization;
 
 namespace ShareInvest.Bithumb.Models;
 
-public class Ticker
+public class Ticker : Response
 {
     /// <summary>종목 구분 코드</summary>
     [DataMember, JsonProperty("market"), JsonPropertyName("market")]
